@@ -37,17 +37,35 @@ module.exports.routes = {
     action: "list"
     //view: 'home/index'
   },
-    "GET /post/create": {
-        view: 'home/create'  
-    },
-   "POST /post/create": {
+    
+  "GET /post/create": {
+    view: 'home/create'  
+  },
+    
+  "POST /post/create": {
     controller: "post",
     action: "create"  
-    },  
-  '/about': {
+  },
+    
+  "DELETE /post/destroy/:id": {
+    controller: "post",
+    action: "destroy"
+  },
+    
+  '/home/about': {
     controller: "about",
     action: "read"
     //view: 'home/about'
+  },
+    
+  "GET /post/update/:id": {
+    controller: "post",
+    action: "updatePage"
+  },
+
+  "PUT /post/:id": {
+    controller: "post",
+    action: "update"
   }
 
   /*

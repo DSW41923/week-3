@@ -16,6 +16,7 @@
  */
 
 module.exports = {
+    
     list: function (req, res) {
       
         Post.find({}).done(function (err, posts) {
@@ -41,6 +42,67 @@ module.exports = {
             
       }); 
     },
+    
+    destroy: function (req, res) {
+        
+        Post.findOne(req.param("id")).done(function(err, post) {
+          // we now have a model with instance methods attached
+          // destroy the record
+          Post.destroy(function(err) {
+            // record has been removed            
+          });
+            
+            res.redirect("back");
+        });
+    },
+    
+    updatePage: function (req, res) {
+     var id = req.param("id");
+
+     Post.findOne({
+       id: id
+     }).done(function (err, post) {
+       if (err) {
+         req.flash("info", "info: you point to wrong number");
+         return res.redirect("/");
+       }
+       return res.view("home/update", {
+         post: post
+       });
+     });
+   },
+
+  /**
+   * Action blueprints:
+   *    `/post/update`
+   */
+   update: function (req, res) {
+    var id = req.param("id");
+    var title = req.body.title;
+    var content = req.body.content;
+
+    if (title && content && title.length > 0 && content.length > 0) {
+      // update post
+      Post.update({
+        id: id
+      }, {
+        title: title,
+        content: content
+      })
+      .done(function (err, post) {
+        if (err) {
+          req.flash("info", "info: you point to wrong number");
+        }
+         res.redirect("/post/" + post.id);
+      });
+    }
+    
+
+    // // Send a JSON response
+    // return res.json({
+    //   hello: 'world'
+    // });
+  },
 
   /**
    * Overrides for the settings in `config/controllers.js`
@@ -50,3 +112,4 @@ module.exports = {
 
   
 };
+    

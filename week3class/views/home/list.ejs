@@ -8,13 +8,19 @@
 define(function() {
 return {};
 });-->
-
-<h1>HAHAHAH</h1>
-<a href="/post/create">Create u'r own things</a>
-<ul>
+         
+<h1>HAHAHAHA</h1>
+<a href="/post/create">Create your own things</a>
+<ol>
     <% posts.forEach(function (post, idx) {%>
     <li>
         <a href="/post/<%= post.id %>"> <%= post.title %> </a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="/post/update/<%= post.id %>"> update <%= post.title %> </a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="/post/destroy/<%= post.id %>"> delete <%= post.title %> </a>
     </li>
     <% }); %>
-</ul>
+</ol>
+
+<a href="/home/about"> about </a>
